@@ -1,0 +1,286 @@
+{
+    "Data": {
+        "Objectives": [
+            {
+                "Type": "statemachine",
+                "Id": "ee5c5353-e0ad-47d8-99ad-3a4537731f95",
+                "BriefingText": {
+                    "$loc": {
+                        "key": "UI_CONTRACT_GENERAL_OBJ_KILL",
+                        "data": "$($repository 0bf717d8-0f92-48b3-8df7-586a23712082).Name"
+                    }
+                },
+                "HUDTemplate": {
+                    "display": {
+                        "$loc": {
+                            "key": "UI_CONTRACT_GENERAL_OBJ_KILL",
+                            "data": "$($repository 0bf717d8-0f92-48b3-8df7-586a23712082).Name"
+                        }
+                    }
+                },
+                "Category": "primary",
+                "Definition": {
+                    "Scope": "Hit",
+                    "Context": {
+                        "Targets": [
+                            "0bf717d8-0f92-48b3-8df7-586a23712082"
+                        ]
+                    },
+                    "States": {
+                        "Start": {
+                            "Kill": [
+                                {
+                                    "Condition": {
+                                        "$eq": [
+                                            "$Value.RepositoryId",
+                                            "0bf717d8-0f92-48b3-8df7-586a23712082"
+                                        ]
+                                    },
+                                    "Transition": "Success"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "TargetConditions": [
+                    {
+                        "Type": "hitmansuit",
+                        "RepositoryId": "28d1aef1-45ba-4e8d-9bca-7cd8b4e5b4f8",
+                        "HardCondition": false,
+                        "ObjectiveId": "1eb3c342-977f-45ce-9070-500f510de971",
+                        "KillMethod": ""
+                    },
+                    {
+                        "Type": "killmethod",
+                        "RepositoryId": "3dd70135-55c0-4199-b55b-d80ea1ac070b",
+                        "HardCondition": false,
+                        "ObjectiveId": "4a485bab-efb3-4e23-ab28-1639f7c73248",
+                        "KillMethod": "explosive"
+                    }
+                ]
+            },
+            {
+                "Type": "statemachine",
+                "Id": "1eb3c342-977f-45ce-9070-500f510de971",
+                "Category": "secondary",
+                "Definition": {
+                    "Scope": "Hit",
+                    "Context": {
+                        "Targets": [
+                            "0bf717d8-0f92-48b3-8df7-586a23712082"
+                        ]
+                    },
+                    "States": {
+                        "Start": {
+                            "Kill": [
+                                {
+                                    "Condition": {
+                                        "$and": [
+                                            {
+                                                "$eq": [
+                                                    "$Value.RepositoryId",
+                                                    "0bf717d8-0f92-48b3-8df7-586a23712082"
+                                                ]
+                                            },
+                                            {
+                                                "$eq": [
+                                                    "$Value.OutfitIsHitmanSuit",
+                                                    true
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "Transition": "Success"
+                                },
+                                {
+                                    "Condition": {
+                                        "$eq": [
+                                            "$Value.RepositoryId",
+                                            "0bf717d8-0f92-48b3-8df7-586a23712082"
+                                        ]
+                                    },
+                                    "Transition": "Failure"
+                                }
+                            ]
+                        }
+                    }
+                }
+            },
+            {
+                "Type": "statemachine",
+                "Id": "4a485bab-efb3-4e23-ab28-1639f7c73248",
+                "Category": "secondary",
+                "Definition": {
+                    "Scope": "Hit",
+                    "Context": {
+                        "Targets": [
+                            "0bf717d8-0f92-48b3-8df7-586a23712082"
+                        ]
+                    },
+                    "States": {
+                        "Start": {
+                            "Kill": [
+                                {
+                                    "Condition": {
+                                        "$and": [
+                                            {
+                                                "$eq": [
+                                                    "$Value.RepositoryId",
+                                                    "0bf717d8-0f92-48b3-8df7-586a23712082"
+                                                ]
+                                            },
+                                            {
+                                                "$any": {
+                                                    "?": {
+                                                        "$eq": [
+                                                            "$.#",
+                                                            "explosive"
+                                                        ]
+                                                    },
+                                                    "in": [
+                                                        "$Value.KillMethodBroad",
+                                                        "$Value.KillMethodStrict"
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    "Transition": "Success"
+                                },
+                                {
+                                    "Condition": {
+                                        "$eq": [
+                                            "$Value.RepositoryId",
+                                            "0bf717d8-0f92-48b3-8df7-586a23712082"
+                                        ]
+                                    },
+                                    "Transition": "Failure"
+                                }
+                            ]
+                        }
+                    }
+                }
+            },
+            {
+                "Type": "statemachine",
+                "Id": "05080d1d-e3c4-4960-a087-661d141363eb",
+                "ObjectiveType": "custom",
+                "Category": "primary",
+                "Exits": [
+                    "757442c5-ce14-412e-aa56-d40e9bfad07e"
+                ],
+                "BriefingName": "$loc UI_CONTRACT_UGC_REQUIRED_EXIT_NAME",
+                "BriefingText": "$loc UI_CONTRACT_UGC_REQUIRED_EXIT_DESC",
+                "LongBriefingText": "$loc UI_CONTRACT_UGC_REQUIRED_EXIT_DESC",
+                "HUDTemplate": {
+                    "display": "$loc $loc UI_CONTRACT_UGC_REQUIRED_EXIT_DESC"
+                },
+                "Image": "images/contractconditions/condition_contrac_required_exit.jpg",
+                "ShowInHud": false,
+                "ExcludeFromScoring": true,
+                "Definition": {
+                    "Scope": "session",
+                    "Context": {
+                        "Exited": false
+                    },
+                    "States": {
+                        "Start": {
+                            "-": [
+                                {
+                                    "Transition": "Success"
+                                }
+                            ]
+                        },
+                        "Success": {
+                            "exit_gate": [
+                                {
+                                    "Actions": {
+                                        "$set": [
+                                            "Exited",
+                                            true
+                                        ]
+                                    }
+                                }
+                            ],
+                            "ExitDisabled": [
+                                {
+                                    "Condition": {
+                                        "$and": [
+                                            {
+                                                "$eq": [
+                                                    "$Value",
+                                                    "757442c5-ce14-412e-aa56-d40e9bfad07e"
+                                                ]
+                                            },
+                                            {
+                                                "$eq": [
+                                                    "$.Exited",
+                                                    false
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "Transition": "Failure"
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        ],
+        "GameChangers": [
+            "9f409781-0a06-4748-b08d-784e78c6d481",
+            "ce154566-a4ba-43c5-be4e-79240ce0f3f9",
+            "25760ea6-958b-4aab-97d4-b539c5b025c8",
+            "1f1f3c9e-1490-4fcc-aee6-5fde7c6c48ca",
+            "f41f18fe-0fe5-416a-a793-50727e594655",
+            "63055f1a-bcd2-4e0f-8caf-b446f01d02f3"
+        ],
+        "Bricks": []
+    },
+    "Metadata": {
+        "Title": "Boom",
+        "Description": "A contract has been issued, and you have been cleared to engage. Eliminate any targets as cleanly as possible, avoiding collateral damage as far as possible.",
+        "ScenePath": "assembly:/_PRO/Scenes/Missions/Paris/_scene_paris.entity",
+        "Location": "LOCATION_PARIS",
+        "IsPublished": true,
+        "CreatorUserId": "7a5bc685-f142-4e25-87b2-3d2fa72d1ffb",
+        "GameVersion": "6.74.0.0",
+        "ServerVersion": "6.74.61.0",
+        "Type": "usercreated",
+        "Id": "a234348f-f12a-4b34-a0fb-d6a00d3daa82",
+        "PublicId": "102607151762",
+        "TileImage": "$($repository 0bf717d8-0f92-48b3-8df7-586a23712082).Image",
+        "GroupObjectiveDisplayOrder": [
+            {
+                "Id": "ee5c5353-e0ad-47d8-99ad-3a4537731f95"
+            },
+            {
+                "Id": "00000000-0000-0000-0000-000000000000"
+            },
+            {
+                "Id": "05080d1d-e3c4-4960-a087-661d141363eb"
+            },
+            {
+                "Id": "f41f18fe-0fe5-416a-a793-50727e594655"
+            },
+            {
+                "Id": "9f409781-0a06-4748-b08d-784e78c6d481"
+            },
+            {
+                "Id": "1f1f3c9e-1490-4fcc-aee6-5fde7c6c48ca"
+            },
+            {
+                "Id": "63055f1a-bcd2-4e0f-8caf-b446f01d02f3"
+            },
+            {
+                "Id": "25760ea6-958b-4aab-97d4-b539c5b025c8"
+            },
+            {
+                "Id": "ce154566-a4ba-43c5-be4e-79240ce0f3f9"
+            }
+        ],
+        "CreationTimestamp": "2020-09-16T22:39:43.487Z"
+    },
+    "UserData": {}
+}

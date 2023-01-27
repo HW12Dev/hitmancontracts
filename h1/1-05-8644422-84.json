@@ -1,0 +1,272 @@
+{
+    "Data": {
+        "Objectives": [
+            {
+                "Type": "statemachine",
+                "Id": "837e5402-6690-4e30-9432-1aeb41cd9453",
+                "BriefingText": {
+                    "$loc": {
+                        "key": "UI_CONTRACT_GENERAL_OBJ_KILL",
+                        "data": "$($repository 9c81b545-a234-46c5-9296-54f9f2a0bb6d).Name"
+                    }
+                },
+                "HUDTemplate": {
+                    "display": {
+                        "$loc": {
+                            "key": "UI_CONTRACT_GENERAL_OBJ_KILL",
+                            "data": "$($repository 9c81b545-a234-46c5-9296-54f9f2a0bb6d).Name"
+                        }
+                    }
+                },
+                "Category": "primary",
+                "Definition": {
+                    "Scope": "Hit",
+                    "Context": {
+                        "Targets": [
+                            "9c81b545-a234-46c5-9296-54f9f2a0bb6d"
+                        ]
+                    },
+                    "States": {
+                        "Start": {
+                            "Kill": [
+                                {
+                                    "Condition": {
+                                        "$eq": [
+                                            "$Value.RepositoryId",
+                                            "9c81b545-a234-46c5-9296-54f9f2a0bb6d"
+                                        ]
+                                    },
+                                    "Transition": "Success"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "TargetConditions": [
+                    {
+                        "Type": "hitmansuit",
+                        "RepositoryId": "14f19447-5599-4bd2-82b5-20c02b1c46d7",
+                        "HardCondition": false,
+                        "ObjectiveId": "567fd596-216a-4e8a-8332-68b17753fafe",
+                        "KillMethod": ""
+                    },
+                    {
+                        "Type": "killmethod",
+                        "RepositoryId": "e70adb5b-0646-4f88-bd4a-85bea7a2a654",
+                        "HardCondition": false,
+                        "ObjectiveId": "1e6f28bd-ba2c-429a-8048-10b137ff2746",
+                        "KillMethod": "pistol"
+                    }
+                ]
+            },
+            {
+                "Type": "statemachine",
+                "Id": "567fd596-216a-4e8a-8332-68b17753fafe",
+                "Category": "secondary",
+                "Definition": {
+                    "Scope": "Hit",
+                    "Context": {
+                        "Targets": [
+                            "9c81b545-a234-46c5-9296-54f9f2a0bb6d"
+                        ]
+                    },
+                    "States": {
+                        "Start": {
+                            "Kill": [
+                                {
+                                    "Condition": {
+                                        "$and": [
+                                            {
+                                                "$eq": [
+                                                    "$Value.RepositoryId",
+                                                    "9c81b545-a234-46c5-9296-54f9f2a0bb6d"
+                                                ]
+                                            },
+                                            {
+                                                "$eq": [
+                                                    "$Value.OutfitIsHitmanSuit",
+                                                    true
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "Transition": "Success"
+                                },
+                                {
+                                    "Condition": {
+                                        "$eq": [
+                                            "$Value.RepositoryId",
+                                            "9c81b545-a234-46c5-9296-54f9f2a0bb6d"
+                                        ]
+                                    },
+                                    "Transition": "Failure"
+                                }
+                            ]
+                        }
+                    }
+                }
+            },
+            {
+                "Type": "statemachine",
+                "Id": "1e6f28bd-ba2c-429a-8048-10b137ff2746",
+                "Category": "secondary",
+                "Definition": {
+                    "Scope": "Hit",
+                    "Context": {
+                        "Targets": [
+                            "9c81b545-a234-46c5-9296-54f9f2a0bb6d"
+                        ]
+                    },
+                    "States": {
+                        "Start": {
+                            "Kill": [
+                                {
+                                    "Condition": {
+                                        "$and": [
+                                            {
+                                                "$eq": [
+                                                    "$Value.RepositoryId",
+                                                    "9c81b545-a234-46c5-9296-54f9f2a0bb6d"
+                                                ]
+                                            },
+                                            {
+                                                "$any": {
+                                                    "?": {
+                                                        "$eq": [
+                                                            "$.#",
+                                                            "pistol"
+                                                        ]
+                                                    },
+                                                    "in": [
+                                                        "$Value.KillMethodBroad",
+                                                        "$Value.KillMethodStrict"
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    "Transition": "Success"
+                                },
+                                {
+                                    "Condition": {
+                                        "$eq": [
+                                            "$Value.RepositoryId",
+                                            "9c81b545-a234-46c5-9296-54f9f2a0bb6d"
+                                        ]
+                                    },
+                                    "Transition": "Failure"
+                                }
+                            ]
+                        }
+                    }
+                }
+            },
+            {
+                "Type": "statemachine",
+                "Id": "011b3a6f-4292-432b-a405-db9b67b2ecad",
+                "ObjectiveType": "custom",
+                "Category": "primary",
+                "Exits": [
+                    "1df779ab-3cea-46b3-8e9d-42ea92f78b6a"
+                ],
+                "BriefingName": "$loc UI_CONTRACT_UGC_REQUIRED_EXIT_NAME",
+                "BriefingText": "$loc UI_CONTRACT_UGC_REQUIRED_EXIT_DESC",
+                "LongBriefingText": "$loc UI_CONTRACT_UGC_REQUIRED_EXIT_DESC",
+                "HUDTemplate": {
+                    "display": "$loc $loc UI_CONTRACT_UGC_REQUIRED_EXIT_DESC"
+                },
+                "Image": "images/contractconditions/condition_contrac_required_exit.jpg",
+                "ShowInHud": false,
+                "ExcludeFromScoring": true,
+                "Definition": {
+                    "Scope": "session",
+                    "Context": {
+                        "Exited": false
+                    },
+                    "States": {
+                        "Start": {
+                            "-": [
+                                {
+                                    "Transition": "Success"
+                                }
+                            ]
+                        },
+                        "Success": {
+                            "exit_gate": [
+                                {
+                                    "Actions": {
+                                        "$set": [
+                                            "Exited",
+                                            true
+                                        ]
+                                    }
+                                }
+                            ],
+                            "ExitDisabled": [
+                                {
+                                    "Condition": {
+                                        "$and": [
+                                            {
+                                                "$eq": [
+                                                    "$Value",
+                                                    "1df779ab-3cea-46b3-8e9d-42ea92f78b6a"
+                                                ]
+                                            },
+                                            {
+                                                "$eq": [
+                                                    "$.Exited",
+                                                    false
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "Transition": "Failure"
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        ],
+        "GameChangers": [
+            "1f1f3c9e-1490-4fcc-aee6-5fde7c6c48ca"
+        ],
+        "Bricks": [],
+        "Stashpoints": [
+            "ea156a43-2020-4fee-b726-a5d01c2b0cc2"
+        ],
+        "Entrances": [
+            "da717656-934e-4783-8c36-65bf486cfdfa"
+        ]
+    },
+    "Metadata": {
+        "Title": "Bosco Bullet Time",
+        "Description": "The whining Dino Bosco has been targeted for termination.\rThe client requires Bosco to be terminated with a pistol, and without any other casualties.\rThe client also has required delivery of Dino Bosco&apos;s car.\r\rGood luck 47.",
+        "ScenePath": "assembly:/_pro/scenes/missions/coastaltown/_scene_copperhead.entity",
+        "Location": "LOCATION_COASTALTOWN_MOVIESET",
+        "IsPublished": true,
+        "CreatorUserId": "37e97b30-7b33-402d-8546-a3786dd7138c",
+        "GameVersion": "6.71.0.0",
+        "ServerVersion": "6.71.141.0",
+        "Type": "usercreated",
+        "Id": "75c046a9-07a7-4e1b-96ca-46d220ab008f",
+        "PublicId": "105864442284",
+        "TileImage": "$($repository 9c81b545-a234-46c5-9296-54f9f2a0bb6d).Image",
+        "GroupObjectiveDisplayOrder": [
+            {
+                "Id": "837e5402-6690-4e30-9432-1aeb41cd9453"
+            },
+            {
+                "Id": "00000000-0000-0000-0000-000000000000"
+            },
+            {
+                "Id": "011b3a6f-4292-432b-a405-db9b67b2ecad"
+            },
+            {
+                "Id": "1f1f3c9e-1490-4fcc-aee6-5fde7c6c48ca"
+            }
+        ],
+        "CreationTimestamp": "2017-12-01T20:45:05.74Z"
+    },
+    "UserData": {}
+}

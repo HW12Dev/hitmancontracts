@@ -1,0 +1,267 @@
+{
+    "Data": {
+        "Objectives": [
+            {
+                "Type": "statemachine",
+                "Id": "b7da37df-4796-4f35-a148-c9348d8f1d6b",
+                "BriefingText": {
+                    "$loc": {
+                        "key": "UI_CONTRACT_GENERAL_OBJ_KILL",
+                        "data": "$($repository 9d4e194d-67e5-48a6-819e-172556f40157).Name"
+                    }
+                },
+                "HUDTemplate": {
+                    "display": {
+                        "$loc": {
+                            "key": "UI_CONTRACT_GENERAL_OBJ_KILL",
+                            "data": "$($repository 9d4e194d-67e5-48a6-819e-172556f40157).Name"
+                        }
+                    }
+                },
+                "Category": "primary",
+                "Definition": {
+                    "Scope": "Hit",
+                    "Context": {
+                        "Targets": [
+                            "9d4e194d-67e5-48a6-819e-172556f40157"
+                        ]
+                    },
+                    "States": {
+                        "Start": {
+                            "Kill": [
+                                {
+                                    "Condition": {
+                                        "$eq": [
+                                            "$Value.RepositoryId",
+                                            "9d4e194d-67e5-48a6-819e-172556f40157"
+                                        ]
+                                    },
+                                    "Transition": "Success"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "TargetConditions": [
+                    {
+                        "Type": "hitmansuit",
+                        "RepositoryId": "c85c6e9c-0aee-43b8-b6e3-d70e76f1890e",
+                        "HardCondition": false,
+                        "ObjectiveId": "0a846f95-bb01-4f23-98f7-2e995320c638",
+                        "KillMethod": ""
+                    },
+                    {
+                        "Type": "killmethod",
+                        "RepositoryId": "1a11a060-358c-4054-98ec-d3491af1d7c6",
+                        "HardCondition": false,
+                        "ObjectiveId": "e1ceab96-7b5f-4040-b8b5-549483b9bc71",
+                        "KillMethod": "fiberwire"
+                    }
+                ]
+            },
+            {
+                "Type": "statemachine",
+                "Id": "0a846f95-bb01-4f23-98f7-2e995320c638",
+                "Category": "secondary",
+                "Definition": {
+                    "Scope": "Hit",
+                    "Context": {
+                        "Targets": [
+                            "9d4e194d-67e5-48a6-819e-172556f40157"
+                        ]
+                    },
+                    "States": {
+                        "Start": {
+                            "Kill": [
+                                {
+                                    "Condition": {
+                                        "$and": [
+                                            {
+                                                "$eq": [
+                                                    "$Value.RepositoryId",
+                                                    "9d4e194d-67e5-48a6-819e-172556f40157"
+                                                ]
+                                            },
+                                            {
+                                                "$eq": [
+                                                    "$Value.OutfitIsHitmanSuit",
+                                                    true
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "Transition": "Success"
+                                },
+                                {
+                                    "Condition": {
+                                        "$eq": [
+                                            "$Value.RepositoryId",
+                                            "9d4e194d-67e5-48a6-819e-172556f40157"
+                                        ]
+                                    },
+                                    "Transition": "Failure"
+                                }
+                            ]
+                        }
+                    }
+                }
+            },
+            {
+                "Type": "statemachine",
+                "Id": "e1ceab96-7b5f-4040-b8b5-549483b9bc71",
+                "Category": "secondary",
+                "Definition": {
+                    "Scope": "Hit",
+                    "Context": {
+                        "Targets": [
+                            "9d4e194d-67e5-48a6-819e-172556f40157"
+                        ]
+                    },
+                    "States": {
+                        "Start": {
+                            "Kill": [
+                                {
+                                    "Condition": {
+                                        "$and": [
+                                            {
+                                                "$eq": [
+                                                    "$Value.RepositoryId",
+                                                    "9d4e194d-67e5-48a6-819e-172556f40157"
+                                                ]
+                                            },
+                                            {
+                                                "$any": {
+                                                    "?": {
+                                                        "$eq": [
+                                                            "$.#",
+                                                            "fiberwire"
+                                                        ]
+                                                    },
+                                                    "in": [
+                                                        "$Value.KillMethodBroad",
+                                                        "$Value.KillMethodStrict"
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    "Transition": "Success"
+                                },
+                                {
+                                    "Condition": {
+                                        "$eq": [
+                                            "$Value.RepositoryId",
+                                            "9d4e194d-67e5-48a6-819e-172556f40157"
+                                        ]
+                                    },
+                                    "Transition": "Failure"
+                                }
+                            ]
+                        }
+                    }
+                }
+            },
+            {
+                "Type": "statemachine",
+                "Id": "05080d1d-e3c4-4960-a087-661d141363eb",
+                "ObjectiveType": "custom",
+                "Category": "primary",
+                "Exits": [
+                    "1efc13bc-350f-4e16-b446-f42e2b8cce37"
+                ],
+                "BriefingName": "$loc UI_CONTRACT_UGC_REQUIRED_EXIT_NAME",
+                "BriefingText": "$loc UI_CONTRACT_UGC_REQUIRED_EXIT_DESC",
+                "LongBriefingText": "$loc UI_CONTRACT_UGC_REQUIRED_EXIT_DESC",
+                "HUDTemplate": {
+                    "display": "$loc $loc UI_CONTRACT_UGC_REQUIRED_EXIT_DESC"
+                },
+                "Image": "images/contractconditions/condition_contrac_required_exit.jpg",
+                "ShowInHud": false,
+                "ExcludeFromScoring": true,
+                "Definition": {
+                    "Scope": "session",
+                    "Context": {
+                        "Exited": false
+                    },
+                    "States": {
+                        "Start": {
+                            "-": [
+                                {
+                                    "Transition": "Success"
+                                }
+                            ]
+                        },
+                        "Success": {
+                            "exit_gate": [
+                                {
+                                    "Actions": {
+                                        "$set": [
+                                            "Exited",
+                                            true
+                                        ]
+                                    }
+                                }
+                            ],
+                            "ExitDisabled": [
+                                {
+                                    "Condition": {
+                                        "$and": [
+                                            {
+                                                "$eq": [
+                                                    "$Value",
+                                                    "1efc13bc-350f-4e16-b446-f42e2b8cce37"
+                                                ]
+                                            },
+                                            {
+                                                "$eq": [
+                                                    "$.Exited",
+                                                    false
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "Transition": "Failure"
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        ],
+        "GameChangers": [],
+        "Bricks": [],
+        "Stashpoints": [
+            "9d016e48-d05b-45ce-b58a-bd61e930ac6d"
+        ],
+        "Entrances": [
+            "213d36c0-a6af-4533-90da-2c815f6ec927"
+        ]
+    },
+    "Metadata": {
+        "Title": "An Obvious Murder Part 3",
+        "Description": "Hello 47,\r\rYour target is Mrs.Mookjai, the hotel manager for the Himmappan Hotel. According to our client she is attempting to restore the hotel dameged reputation by your previous killings. \rOur client requested that she is to be eliminated as soon as possible before he can give you his next contract.\r\rGood Luck.",
+        "ScenePath": "assembly:/_pro/scenes/missions/Bangkok/scene_zika.entity",
+        "Location": "LOCATION_BANGKOK_ZIKA",
+        "IsPublished": true,
+        "CreatorUserId": "52780339-5518-40fd-a3aa-b7c2b2cf5cdb",
+        "GameVersion": "6.74.0.0",
+        "ServerVersion": "6.74.33.0",
+        "Type": "usercreated",
+        "Id": "b34b5013-b95e-4d87-b4dc-7475c227a76c",
+        "PublicId": "116950457851",
+        "TileImage": "$($repository 9d4e194d-67e5-48a6-819e-172556f40157).Image",
+        "GroupObjectiveDisplayOrder": [
+            {
+                "Id": "b7da37df-4796-4f35-a148-c9348d8f1d6b"
+            },
+            {
+                "Id": "00000000-0000-0000-0000-000000000000"
+            },
+            {
+                "Id": "05080d1d-e3c4-4960-a087-661d141363eb"
+            }
+        ],
+        "CreationTimestamp": "2018-11-13T14:01:28.87Z"
+    },
+    "UserData": {}
+}

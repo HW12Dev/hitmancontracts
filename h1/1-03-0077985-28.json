@@ -1,0 +1,205 @@
+{
+    "Data": {
+        "Objectives": [
+            {
+                "Type": "statemachine",
+                "Id": "30b782a5-c00c-4a48-8362-a985ec33b7b5",
+                "BriefingText": {
+                    "$loc": {
+                        "key": "UI_CONTRACT_GENERAL_OBJ_KILL",
+                        "data": "$($repository 8de9aa5e-6d61-442f-a4c0-e5bba91cd3cd).Name"
+                    }
+                },
+                "HUDTemplate": {
+                    "display": {
+                        "$loc": {
+                            "key": "UI_CONTRACT_GENERAL_OBJ_KILL",
+                            "data": "$($repository 8de9aa5e-6d61-442f-a4c0-e5bba91cd3cd).Name"
+                        }
+                    }
+                },
+                "Category": "primary",
+                "Definition": {
+                    "Scope": "Hit",
+                    "Context": {
+                        "Targets": [
+                            "8de9aa5e-6d61-442f-a4c0-e5bba91cd3cd"
+                        ]
+                    },
+                    "States": {
+                        "Start": {
+                            "Kill": [
+                                {
+                                    "Condition": {
+                                        "$eq": [
+                                            "$Value.RepositoryId",
+                                            "8de9aa5e-6d61-442f-a4c0-e5bba91cd3cd"
+                                        ]
+                                    },
+                                    "Transition": "Success"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "TargetConditions": [
+                    {
+                        "Type": "disguise",
+                        "RepositoryId": "10601c6b-1f65-44ed-92a1-bf843f023d3f",
+                        "HardCondition": false,
+                        "ObjectiveId": "bd227fc7-aa2f-4457-bd9a-e4a400a90102",
+                        "KillMethod": ""
+                    },
+                    {
+                        "Type": "killmethod_specificitem",
+                        "RepositoryId": "e17172cc-bf70-4df6-9828-d9856b1a24fd",
+                        "HardCondition": false,
+                        "ObjectiveId": "0d22f9a3-a235-4f46-bbc6-1faad8d043a0",
+                        "KillMethod": "melee_lethal"
+                    }
+                ]
+            },
+            {
+                "Type": "statemachine",
+                "Id": "bd227fc7-aa2f-4457-bd9a-e4a400a90102",
+                "Category": "secondary",
+                "Definition": {
+                    "Scope": "Hit",
+                    "Context": {
+                        "Targets": [
+                            "8de9aa5e-6d61-442f-a4c0-e5bba91cd3cd"
+                        ]
+                    },
+                    "States": {
+                        "Start": {
+                            "Kill": [
+                                {
+                                    "Condition": {
+                                        "$and": [
+                                            {
+                                                "$eq": [
+                                                    "$Value.RepositoryId",
+                                                    "8de9aa5e-6d61-442f-a4c0-e5bba91cd3cd"
+                                                ]
+                                            },
+                                            {
+                                                "$eq": [
+                                                    "$Value.OutfitRepositoryId",
+                                                    "10601c6b-1f65-44ed-92a1-bf843f023d3f"
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "Transition": "Success"
+                                },
+                                {
+                                    "Condition": {
+                                        "$eq": [
+                                            "$Value.RepositoryId",
+                                            "8de9aa5e-6d61-442f-a4c0-e5bba91cd3cd"
+                                        ]
+                                    },
+                                    "Transition": "Failure"
+                                }
+                            ]
+                        }
+                    }
+                }
+            },
+            {
+                "Type": "statemachine",
+                "Id": "0d22f9a3-a235-4f46-bbc6-1faad8d043a0",
+                "Category": "secondary",
+                "Definition": {
+                    "Scope": "Hit",
+                    "Context": {
+                        "Targets": [
+                            "8de9aa5e-6d61-442f-a4c0-e5bba91cd3cd"
+                        ]
+                    },
+                    "States": {
+                        "Start": {
+                            "Kill": [
+                                {
+                                    "Condition": {
+                                        "$and": [
+                                            {
+                                                "$and": [
+                                                    {
+                                                        "$eq": [
+                                                            "$Value.RepositoryId",
+                                                            "8de9aa5e-6d61-442f-a4c0-e5bba91cd3cd"
+                                                        ]
+                                                    },
+                                                    {
+                                                        "$any": {
+                                                            "?": {
+                                                                "$eq": [
+                                                                    "$.#",
+                                                                    "melee_lethal"
+                                                                ]
+                                                            },
+                                                            "in": [
+                                                                "$Value.KillMethodBroad",
+                                                                "$Value.KillMethodStrict"
+                                                            ]
+                                                        }
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "$eq": [
+                                                    "$Value.KillItemRepositoryId",
+                                                    "e17172cc-bf70-4df6-9828-d9856b1a24fd"
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "Transition": "Success"
+                                },
+                                {
+                                    "Condition": {
+                                        "$eq": [
+                                            "$Value.RepositoryId",
+                                            "8de9aa5e-6d61-442f-a4c0-e5bba91cd3cd"
+                                        ]
+                                    },
+                                    "Transition": "Failure"
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        ],
+        "GameChangers": [],
+        "Bricks": []
+    },
+    "Metadata": {
+        "Title": "Kill the Brat",
+        "Description": "Bartolo has been sitting pretty on the payout from witnessing his uncle&apos;s demise in the underground lab. His cousin Claudia has always been a nag and now that she&apos;s getting her brother Rocco closer to the Caruso family as well, it&apos;s only a matter of time before they uncover the truth about their father and jeopoardize Bartolo&apos;s nest egg.\r\rHe wants Claudia out of the picture and Rocco to take the fall. Make it messy and make sure you&apos;re seen.",
+        "ScenePath": "assembly:/_PRO/Scenes/Missions/CoastalTown/_scene_octopus.entity",
+        "Location": "LOCATION_COASTALTOWN",
+        "IsPublished": true,
+        "CreatorUserId": "d0440944-d631-4ada-bf38-7394cb3710f5",
+        "GameVersion": "6.74.0.0",
+        "ServerVersion": "6.74.61.0",
+        "Type": "usercreated",
+        "Id": "b4dade77-f247-4722-bcf9-1f11847ec8ec",
+        "PublicId": "103007798528",
+        "TileImage": "$($repository 8de9aa5e-6d61-442f-a4c0-e5bba91cd3cd).Image",
+        "GroupObjectiveDisplayOrder": [
+            {
+                "Id": "30b782a5-c00c-4a48-8362-a985ec33b7b5"
+            },
+            {
+                "Id": "00000000-0000-0000-0000-000000000000"
+            },
+            {
+                "Id": "00000000-0000-0000-0000-000000000000"
+            }
+        ],
+        "CreationTimestamp": "2022-08-01T18:20:07.113Z"
+    },
+    "UserData": {}
+}

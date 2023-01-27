@@ -1,0 +1,204 @@
+{
+    "Data": {
+        "Objectives": [
+            {
+                "Type": "statemachine",
+                "Id": "c186c4f5-3586-4c64-ab6f-736c2ffb3325",
+                "BriefingText": {
+                    "$loc": {
+                        "key": "UI_CONTRACT_GENERAL_OBJ_KILL",
+                        "data": "$($repository 5a9a03d7-0e61-4f36-b8a0-b98f74f3c20d).Name"
+                    }
+                },
+                "HUDTemplate": {
+                    "display": {
+                        "$loc": {
+                            "key": "UI_CONTRACT_GENERAL_OBJ_KILL",
+                            "data": "$($repository 5a9a03d7-0e61-4f36-b8a0-b98f74f3c20d).Name"
+                        }
+                    }
+                },
+                "Category": "primary",
+                "Definition": {
+                    "Scope": "Hit",
+                    "Context": {
+                        "Targets": [
+                            "5a9a03d7-0e61-4f36-b8a0-b98f74f3c20d"
+                        ]
+                    },
+                    "States": {
+                        "Start": {
+                            "Kill": [
+                                {
+                                    "Condition": {
+                                        "$eq": [
+                                            "$Value.RepositoryId",
+                                            "5a9a03d7-0e61-4f36-b8a0-b98f74f3c20d"
+                                        ]
+                                    },
+                                    "Transition": "Success"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "TargetConditions": [
+                    {
+                        "Type": "disguise",
+                        "RepositoryId": "d7d8d5e8-070c-4d6c-9a67-f1165a7bb29d",
+                        "HardCondition": false,
+                        "ObjectiveId": "dd4ab039-f460-4355-9526-74bc4820a39d",
+                        "KillMethod": ""
+                    },
+                    {
+                        "Type": "killmethod",
+                        "RepositoryId": "af9ad679-6a7c-4f8e-9700-ceb5e6887666",
+                        "HardCondition": false,
+                        "ObjectiveId": "cd899823-7eb9-4d3f-aeb8-968bf185a7b5",
+                        "KillMethod": "poison"
+                    }
+                ]
+            },
+            {
+                "Type": "statemachine",
+                "Id": "dd4ab039-f460-4355-9526-74bc4820a39d",
+                "Category": "secondary",
+                "Definition": {
+                    "Scope": "Hit",
+                    "Context": {
+                        "Targets": [
+                            "5a9a03d7-0e61-4f36-b8a0-b98f74f3c20d"
+                        ]
+                    },
+                    "States": {
+                        "Start": {
+                            "Kill": [
+                                {
+                                    "Condition": {
+                                        "$and": [
+                                            {
+                                                "$eq": [
+                                                    "$Value.RepositoryId",
+                                                    "5a9a03d7-0e61-4f36-b8a0-b98f74f3c20d"
+                                                ]
+                                            },
+                                            {
+                                                "$eq": [
+                                                    "$Value.OutfitRepositoryId",
+                                                    "d7d8d5e8-070c-4d6c-9a67-f1165a7bb29d"
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "Transition": "Success"
+                                },
+                                {
+                                    "Condition": {
+                                        "$eq": [
+                                            "$Value.RepositoryId",
+                                            "5a9a03d7-0e61-4f36-b8a0-b98f74f3c20d"
+                                        ]
+                                    },
+                                    "Transition": "Failure"
+                                }
+                            ]
+                        }
+                    }
+                }
+            },
+            {
+                "Type": "statemachine",
+                "Id": "cd899823-7eb9-4d3f-aeb8-968bf185a7b5",
+                "Category": "secondary",
+                "Definition": {
+                    "Scope": "Hit",
+                    "Context": {
+                        "Targets": [
+                            "5a9a03d7-0e61-4f36-b8a0-b98f74f3c20d"
+                        ]
+                    },
+                    "States": {
+                        "Start": {
+                            "Kill": [
+                                {
+                                    "Condition": {
+                                        "$and": [
+                                            {
+                                                "$eq": [
+                                                    "$Value.RepositoryId",
+                                                    "5a9a03d7-0e61-4f36-b8a0-b98f74f3c20d"
+                                                ]
+                                            },
+                                            {
+                                                "$any": {
+                                                    "?": {
+                                                        "$eq": [
+                                                            "$.#",
+                                                            "poison"
+                                                        ]
+                                                    },
+                                                    "in": [
+                                                        "$Value.KillMethodBroad",
+                                                        "$Value.KillMethodStrict"
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    "Transition": "Success"
+                                },
+                                {
+                                    "Condition": {
+                                        "$eq": [
+                                            "$Value.RepositoryId",
+                                            "5a9a03d7-0e61-4f36-b8a0-b98f74f3c20d"
+                                        ]
+                                    },
+                                    "Transition": "Failure"
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        ],
+        "GameChangers": [
+            "f41f18fe-0fe5-416a-a793-50727e594655",
+            "1f1f3c9e-1490-4fcc-aee6-5fde7c6c48ca"
+        ],
+        "Bricks": []
+    },
+    "Metadata": {
+        "Title": "The Militant Medicine Hesitation",
+        "Description": "Good afternoon 47, \rtoday your target is  cartel associate Hector Delgado. Our client represents a member of the United States Military, who desires to test a subtle but lethal poison on  the drug lord.\r  \rThe department the client represents originally sent out Ted Mendez under the guise of a meeting with Robert Knox. It seems that Mendez has hesitated, and as a result is target for termination. Our client, a friend of Mendez, wants it to look like Mendez has fulfilled his mission, saving him.",
+        "ScenePath": "assembly:/_pro/scenes/missions/miami/scene_flamingo.entity",
+        "Location": "LOCATION_MIAMI",
+        "IsPublished": true,
+        "CreatorUserId": "ebdc7475-cf98-4eea-9a00-71640f372249",
+        "GameVersion": "7.6.0.0",
+        "ServerVersion": "7.6.45.0",
+        "Type": "usercreated",
+        "Id": "94afd10e-7f23-44ba-a79b-8b79efeda7ab",
+        "PublicId": "111714189596",
+        "TileImage": "$($repository 5a9a03d7-0e61-4f36-b8a0-b98f74f3c20d).Image",
+        "GroupObjectiveDisplayOrder": [
+            {
+                "Id": "c186c4f5-3586-4c64-ab6f-736c2ffb3325"
+            },
+            {
+                "Id": "00000000-0000-0000-0000-000000000000"
+            },
+            {
+                "Id": "00000000-0000-0000-0000-000000000000"
+            },
+            {
+                "Id": "f41f18fe-0fe5-416a-a793-50727e594655"
+            },
+            {
+                "Id": "1f1f3c9e-1490-4fcc-aee6-5fde7c6c48ca"
+            }
+        ],
+        "CreationTimestamp": "2019-01-06T10:35:25.9766667Z"
+    },
+    "UserData": {}
+}

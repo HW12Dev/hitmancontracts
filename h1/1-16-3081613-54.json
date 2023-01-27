@@ -1,0 +1,213 @@
+{
+    "Data": {
+        "Objectives": [
+            {
+                "Type": "statemachine",
+                "Id": "420e969d-6de9-4cb9-9b07-f4059554f09b",
+                "BriefingText": {
+                    "$loc": {
+                        "key": "UI_CONTRACT_GENERAL_OBJ_KILL",
+                        "data": "$($repository 3cbbe5aa-de28-40b9-bbba-b8badb6131f2).Name"
+                    }
+                },
+                "HUDTemplate": {
+                    "display": {
+                        "$loc": {
+                            "key": "UI_CONTRACT_GENERAL_OBJ_KILL",
+                            "data": "$($repository 3cbbe5aa-de28-40b9-bbba-b8badb6131f2).Name"
+                        }
+                    }
+                },
+                "Category": "primary",
+                "Definition": {
+                    "Scope": "Hit",
+                    "Context": {
+                        "Targets": [
+                            "3cbbe5aa-de28-40b9-bbba-b8badb6131f2"
+                        ]
+                    },
+                    "States": {
+                        "Start": {
+                            "Kill": [
+                                {
+                                    "Condition": {
+                                        "$eq": [
+                                            "$Value.RepositoryId",
+                                            "3cbbe5aa-de28-40b9-bbba-b8badb6131f2"
+                                        ]
+                                    },
+                                    "Transition": "Success"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "TargetConditions": [
+                    {
+                        "Type": "killmethod",
+                        "RepositoryId": "356b016c-fdb3-47d3-913c-3973e6a5a8cf",
+                        "HardCondition": false,
+                        "ObjectiveId": "c385f671-2568-41b6-8c32-0d27c64c7d48",
+                        "KillMethod": "explosive"
+                    }
+                ]
+            },
+            {
+                "Type": "statemachine",
+                "Id": "c385f671-2568-41b6-8c32-0d27c64c7d48",
+                "Category": "secondary",
+                "Definition": {
+                    "Scope": "Hit",
+                    "Context": {
+                        "Targets": [
+                            "3cbbe5aa-de28-40b9-bbba-b8badb6131f2"
+                        ]
+                    },
+                    "States": {
+                        "Start": {
+                            "Kill": [
+                                {
+                                    "Condition": {
+                                        "$and": [
+                                            {
+                                                "$eq": [
+                                                    "$Value.RepositoryId",
+                                                    "3cbbe5aa-de28-40b9-bbba-b8badb6131f2"
+                                                ]
+                                            },
+                                            {
+                                                "$any": {
+                                                    "?": {
+                                                        "$eq": [
+                                                            "$.#",
+                                                            "explosive"
+                                                        ]
+                                                    },
+                                                    "in": [
+                                                        "$Value.KillMethodBroad",
+                                                        "$Value.KillMethodStrict"
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    "Transition": "Success"
+                                },
+                                {
+                                    "Condition": {
+                                        "$eq": [
+                                            "$Value.RepositoryId",
+                                            "3cbbe5aa-de28-40b9-bbba-b8badb6131f2"
+                                        ]
+                                    },
+                                    "Transition": "Failure"
+                                }
+                            ]
+                        }
+                    }
+                }
+            },
+            {
+                "Type": "statemachine",
+                "Id": "1a596216-381e-4592-9798-26f156973942",
+                "ObjectiveType": "custom",
+                "Category": "secondary",
+                "BriefingName": "$loc UI_CONTRACT_UGC_TIME_LIMIT_NAME",
+                "BriefingText": {
+                    "$loc": {
+                        "key": "UI_CONTRACT_UGC_TIME_LIMIT_SECONDARY_DESC",
+                        "data": "$formatstring 02:40"
+                    }
+                },
+                "LongBriefingText": {
+                    "$loc": {
+                        "key": "UI_CONTRACT_UGC_TIME_LIMIT_SECONDARY_DESC",
+                        "data": "$formatstring 02:40"
+                    }
+                },
+                "HUDTemplate": {
+                    "display": {
+                        "$loc": {
+                            "key": "UI_CONTRACT_UGC_TIME_LIMIT_SECONDARY_DESC",
+                            "data": "$formatstring 02:40"
+                        }
+                    }
+                },
+                "Image": "images/contractconditions/condition_contrac_time_limit.jpg",
+                "OnActive": {
+                    "IfInProgress": {
+                        "State": "Completed"
+                    }
+                },
+                "CombinedDisplayInHud": true,
+                "Definition": {
+                    "Scope": "session",
+                    "States": {
+                        "Start": {
+                            "IntroCutEnd": [
+                                {
+                                    "Transition": "TimerRunning"
+                                }
+                            ]
+                        },
+                        "TimerRunning": {
+                            "exit_gate": [
+                                {
+                                    "Transition": "Success"
+                                }
+                            ],
+                            "$timer": [
+                                {
+                                    "Condition": {
+                                        "$after": 160.667542
+                                    },
+                                    "Transition": "Failure"
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        ],
+        "GameChangers": [
+            "f41f18fe-0fe5-416a-a793-50727e594655"
+        ],
+        "Bricks": [],
+        "Stashpoints": [
+            "9d016e48-d05b-45ce-b58a-bd61e930ac6d"
+        ],
+        "Entrances": [
+            "213d36c0-a6af-4533-90da-2c815f6ec927"
+        ]
+    },
+    "Metadata": {
+        "Title": "Boomkok",
+        "Description": "Good Evening 47,\r\rOur client has just discovered her husband may be having an affair. She knows the target personally - one Talin Dutertre, former child star turned perfume tycoon.\r\rThe client&apos;s husband Marcus will rendevous with Talin in Bangkok. She doesn&apos;t want him to die, but instead she&apos;d like to leave a nasty impression and thus has requested we utilise an explosive device to &apos;annihilate that nasty bint&apos;. \rThis could be tricky, as the potential for collateral damage is high.\r\rGood Luck 47",
+        "ScenePath": "assembly:/_pro/scenes/missions/Bangkok/scene_zika.entity",
+        "Location": "LOCATION_BANGKOK_ZIKA",
+        "IsPublished": true,
+        "CreatorUserId": "1f357c9c-9f0d-4e68-b2a7-fb2645862cb4",
+        "GameVersion": "6.73.0.0",
+        "ServerVersion": "6.73.22.0",
+        "Type": "usercreated",
+        "Id": "c9f6ef5a-4032-4bd3-90e6-c3fda21ac73d",
+        "PublicId": "116308161354",
+        "TileImage": "$($repository 3cbbe5aa-de28-40b9-bbba-b8badb6131f2).Image",
+        "GroupObjectiveDisplayOrder": [
+            {
+                "Id": "420e969d-6de9-4cb9-9b07-f4059554f09b"
+            },
+            {
+                "Id": "1a596216-381e-4592-9798-26f156973942"
+            },
+            {
+                "Id": "00000000-0000-0000-0000-000000000000"
+            },
+            {
+                "Id": "f41f18fe-0fe5-416a-a793-50727e594655"
+            }
+        ],
+        "CreationTimestamp": "2018-09-25T12:54:08.59Z"
+    },
+    "UserData": {}
+}

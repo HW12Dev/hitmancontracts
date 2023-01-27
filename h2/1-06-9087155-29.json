@@ -1,0 +1,205 @@
+{
+    "Data": {
+        "Objectives": [
+            {
+                "Type": "statemachine",
+                "Id": "0ed6cb57-b9a0-492a-9d1c-f28cab6d8cc9",
+                "BriefingText": {
+                    "$loc": {
+                        "key": "UI_CONTRACT_GENERAL_OBJ_KILL",
+                        "data": "$($repository 7d58dcb0-7c1c-49e4-8f94-753354ad4c24).Name"
+                    }
+                },
+                "HUDTemplate": {
+                    "display": {
+                        "$loc": {
+                            "key": "UI_CONTRACT_GENERAL_OBJ_KILL",
+                            "data": "$($repository 7d58dcb0-7c1c-49e4-8f94-753354ad4c24).Name"
+                        }
+                    }
+                },
+                "Category": "primary",
+                "Definition": {
+                    "Scope": "Hit",
+                    "Context": {
+                        "Targets": [
+                            "7d58dcb0-7c1c-49e4-8f94-753354ad4c24"
+                        ]
+                    },
+                    "States": {
+                        "Start": {
+                            "Kill": [
+                                {
+                                    "Condition": {
+                                        "$eq": [
+                                            "$Value.RepositoryId",
+                                            "7d58dcb0-7c1c-49e4-8f94-753354ad4c24"
+                                        ]
+                                    },
+                                    "Transition": "Success"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "TargetConditions": [
+                    {
+                        "Type": "hitmansuit",
+                        "RepositoryId": "58161492-10c8-4fce-860c-89e9b0a764fb",
+                        "HardCondition": false,
+                        "ObjectiveId": "c1f5e51c-6279-43c7-8245-38f01852db76",
+                        "KillMethod": ""
+                    },
+                    {
+                        "Type": "killmethod_specificitem",
+                        "RepositoryId": "a8bc4325-718e-45ba-b0e4-000729c70ce4",
+                        "HardCondition": false,
+                        "ObjectiveId": "2c4a4668-64b9-4349-864d-1212786d1f37",
+                        "KillMethod": "melee_lethal"
+                    }
+                ]
+            },
+            {
+                "Type": "statemachine",
+                "Id": "c1f5e51c-6279-43c7-8245-38f01852db76",
+                "Category": "secondary",
+                "Definition": {
+                    "Scope": "Hit",
+                    "Context": {
+                        "Targets": [
+                            "7d58dcb0-7c1c-49e4-8f94-753354ad4c24"
+                        ]
+                    },
+                    "States": {
+                        "Start": {
+                            "Kill": [
+                                {
+                                    "Condition": {
+                                        "$and": [
+                                            {
+                                                "$eq": [
+                                                    "$Value.RepositoryId",
+                                                    "7d58dcb0-7c1c-49e4-8f94-753354ad4c24"
+                                                ]
+                                            },
+                                            {
+                                                "$eq": [
+                                                    "$Value.OutfitIsHitmanSuit",
+                                                    true
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "Transition": "Success"
+                                },
+                                {
+                                    "Condition": {
+                                        "$eq": [
+                                            "$Value.RepositoryId",
+                                            "7d58dcb0-7c1c-49e4-8f94-753354ad4c24"
+                                        ]
+                                    },
+                                    "Transition": "Failure"
+                                }
+                            ]
+                        }
+                    }
+                }
+            },
+            {
+                "Type": "statemachine",
+                "Id": "2c4a4668-64b9-4349-864d-1212786d1f37",
+                "Category": "secondary",
+                "Definition": {
+                    "Scope": "Hit",
+                    "Context": {
+                        "Targets": [
+                            "7d58dcb0-7c1c-49e4-8f94-753354ad4c24"
+                        ]
+                    },
+                    "States": {
+                        "Start": {
+                            "Kill": [
+                                {
+                                    "Condition": {
+                                        "$and": [
+                                            {
+                                                "$and": [
+                                                    {
+                                                        "$eq": [
+                                                            "$Value.RepositoryId",
+                                                            "7d58dcb0-7c1c-49e4-8f94-753354ad4c24"
+                                                        ]
+                                                    },
+                                                    {
+                                                        "$any": {
+                                                            "?": {
+                                                                "$eq": [
+                                                                    "$.#",
+                                                                    "melee_lethal"
+                                                                ]
+                                                            },
+                                                            "in": [
+                                                                "$Value.KillMethodBroad",
+                                                                "$Value.KillMethodStrict"
+                                                            ]
+                                                        }
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "$eq": [
+                                                    "$Value.KillItemRepositoryId",
+                                                    "a8bc4325-718e-45ba-b0e4-000729c70ce4"
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "Transition": "Success"
+                                },
+                                {
+                                    "Condition": {
+                                        "$eq": [
+                                            "$Value.RepositoryId",
+                                            "7d58dcb0-7c1c-49e4-8f94-753354ad4c24"
+                                        ]
+                                    },
+                                    "Transition": "Failure"
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        ],
+        "GameChangers": [],
+        "Bricks": []
+    },
+    "Metadata": {
+        "Title": "夺命邀请函（削弱版）",
+        "Description": "马拉喀什的水烟馆将要举行一场地下拍卖会，但是一位客人的邀请函被一位国际大盗偷走了，我们需要你杀死这位大盗并将邀请函带回来。\r\r现在至少有两种稳定可行的SA线路，还有可能存在的第三第四种。\r\r比起原版取消了所有的额外条件，包括只消灭目标、别被发现、无监控录像、无人发现尸体、不变更伪装、仅限爆头、完美射手、不得制服。",
+        "ScenePath": "assembly:/_pro/scenes/missions/marrakesh/_scene_spider.entity",
+        "Location": "LOCATION_MARRAKECH",
+        "IsPublished": true,
+        "CreatorUserId": "3f902b06-8c9b-421b-850c-29acb0fc9755",
+        "GameVersion": "7.17.0.0",
+        "ServerVersion": "7.21.0.22",
+        "Type": "usercreated",
+        "Id": "f6594be3-bed4-429e-b093-6fc05152636d",
+        "PublicId": "106908715529",
+        "TileImage": "$($repository 7d58dcb0-7c1c-49e4-8f94-753354ad4c24).Image",
+        "GroupObjectiveDisplayOrder": [
+            {
+                "Id": "0ed6cb57-b9a0-492a-9d1c-f28cab6d8cc9"
+            },
+            {
+                "Id": "00000000-0000-0000-0000-000000000000"
+            },
+            {
+                "Id": "00000000-0000-0000-0000-000000000000"
+            }
+        ],
+        "CreationTimestamp": "2023-01-17T05:43:26.4981268Z"
+    },
+    "UserData": {}
+}
